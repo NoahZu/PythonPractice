@@ -71,4 +71,51 @@
 	- filter函数的第一个参数也是一个函数对象。它也是将作为参数的函数对象作用于多个元素。如果函数对象返回的是True，则该次的元素被储存于返回的表中。就相当于过滤器
 	- reduce函数的第一个参数也是函数，但有一个要求，就是这个函数自身能接收两个参数。reduce可以累进地将函数作用于各个参数，比如：print reduce((lambda x,y: x+y),[1,2,5,7,9])。educe将表中的前两个元素(1和2)传递给lambda函数，得到3。该返回值(3)将作为lambda函数的第一个参数，而表中的下一个元素(5)作为lambda函数的第二个参数，进行下一次的对lambda函数的调用，得到8
 - ​正则表达式
-​
+ - 正则表达式需要导入库re
+ - 几个方法：
+	 - re.search(pattern, string)  搜索整个字符串，直到发现符合的子字符串。
+	 - re.search(pattern, string)  搜索整个字符串，直到发现符合的子字符串。
+	 - m.group()来调用搜索的结果
+	 - str = re.sub(pattern, replacement, string) 在string中利用正则变换pattern进行搜索，对于搜索到的字符串，用另一字符串replacement替换。返回替换后的字符串。
+	 - re.split()    # 根据正则表达式分割字符串， 将分割后的所有子字符串放在一个表(list)中返回
+	 - re.findall()  # 根据正则表达式搜索字符串，将所有符合的子字符串放在一个表(list)中返回
+ - 正则表达式的语法：
+	 - 单个字符：
+		 	- .          任意的一个字符
+			- a|b        字符a或字符b
+			- [afg]      a或者f或者g的一个字符        
+			- [0-4]      0-4范围内的一个字符
+			- [a-f]      a-f范围内的一个字符
+			- [^m]       不是m的一个字符
+			- \s         一个空格
+			- \S         一个非空格
+			- \d         [0-9]
+			- \D         [^0-9]
+			- \w         [0-9a-zA-Z]
+			- \W         [^0-9a-zA-Z]
+	 - 重复：
+	 紧跟在单个字符之后，表示多个这样类似的字符：
+			- *         重复 >=0 次
+			- +         重复 >=1 次
+			- ?         重复 0或者1 次
+			- {m}       重复m次。比如说 a{4}相当于aaaa，再比如说[1-3]{2}相当于[1-3][1-3]
+			- {m, n}    重复m到n次。比如说a{2, 5}表示a重复2到5次。小于m次的重复，或者大于n次的重复都不符合条件。
+	 - 位置
+			- ^ 字符串的起始位置
+			- $ 字符串的结尾位置​
+- 日期与时间
+	- 需要导入time包
+		- time.time()返回以秒计算的时间
+		- time.clock()
+		- time.sleep(10) 相当于java线程休眠 单位是秒
+	- datetime包
+		- datetime.datetime(year,month,day,h,s) 初始化一个datetime对象，可以获取关于这个时间日期的更多信息
+		- 运算：
+			- datetime对象可以相加 直接用+就可以
+			- datetime.timedelta(xx = a) 可以获取一个时间差值
+		- datetime对象与字符串的转化
+
+				from datetime import datetime
+				format = "output-%Y-%m-%d-%H%M%S.txt" 
+				str    = "output-1997-12-23-030000.txt" 
+				t      = datetime.strptime(str, format)
